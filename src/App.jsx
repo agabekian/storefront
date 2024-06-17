@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { dispatchData } from './store/inventory.js';
-import { Button } from '@mui/material'; //
 
 function App() {
     const displayedItems = useSelector((state) =>
