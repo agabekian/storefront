@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { dispatchData } from './store/actions.js';
-import { Button, Typography, List, ListItem } from '@mui/material';
+import { Button, Typography, List, Card, CardContent } from '@mui/material';
 import SimpleCart from './cart/SimpleCart.jsx';
 
 function App() {
@@ -23,7 +23,13 @@ function App() {
             </Button>
             <List>
                 {displayedItems.map((item) => (
-                    <ListItem key={item.id}>{item.name}</ListItem>
+                    <Card key={item.id} variant="outlined">
+                        <CardContent>
+                            <Typography variant="h5" component="div">
+                                {item.name}
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 ))}
             </List>
             <SimpleCart />
