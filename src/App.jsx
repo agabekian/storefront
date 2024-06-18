@@ -1,16 +1,18 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { dispatchData } from './store/actions.js';
-import { Button, Typography, List, Card, CardContent } from '@mui/material';
+import { Button, Typography, Card, CardContent, Grid } from '@mui/material';
 import SimpleCart from './cart/SimpleCart.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { dispatchData, dispatchClicked } from './store/actions.js';
 
 function App() {
     const dispatch = useDispatch();
 
-    const displayedItems = useSelector(
-        (state) => state.inventory.displaySTATE || []
-    );
+    const displayedItems = useSelector((state) => state.inventory.displaySTATE || []);
 
     const handleDisplay = (e) => dispatch(dispatchData(e.target.name));
+    const handleClick = (item) => {
+        console.log(item);
+        dispatch(dispatchClicked(item));
+    };
 
     return (
         <>
@@ -21,18 +23,26 @@ function App() {
             <Button variant="contained" onClick={handleDisplay} name="electronics">
                 Electronics
             </Button>
-            <List>
+            <Grid container spacing={2}>
                 {displayedItems.map((item) => (
-                    <Card key={item.id} variant="outlined">
-                        <CardContent>
-                            <Typography variant="h5" component="div">
-                                {item.name}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
+                        <Card variant="outlined">
+                            <CardContent>
+                                <Typography variant="h5" component="div">
+                                    {item.name}
+                                    <Button
+                                        onClick={() => handleClick(item)}
+                                        variant="outlined"
+                                    >
+                                        Add
+                                    </Button>
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 ))}
-            </List>
-            <SimpleCart />
+            </Grid>
+            <SimpleCart /> {/* No need to pass cartItems as prop */}
         </>
     );
 }

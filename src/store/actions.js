@@ -6,3 +6,10 @@ export function dispatchData(category) {
         payload: category
     }
 }
+
+export function dispatchClicked(item) {
+    return {
+        type: "ADD_TO_CART",
+        payload: item
+    }
+}
