@@ -1,11 +1,16 @@
 ### Application State with Redux
 #####  Author: A.Agabekian 
 ######  6.17.24 lab36
-######  6.18.24 lab37 (
-* new header, styling updated
-* added shopping cart with add (checks for alredy added) and delete func
+######  6.18.24 lab37 :
+* New header with cart icon
+  * Displays cart size 
+* Add to shopping cart. 
+  * Checks if the item already in cart.
+* Display cart items 
+  * option to delete an item.
+* MUI styling updated
 * Began to modularize
-)
+
 ### Storefront
 
 ####  setup
