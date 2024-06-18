@@ -1,14 +1,13 @@
-let initialState = {
+const initialState = {
     addedToCart: []
 };
 
 const cartReducer = (state = initialState, action) => {
     const { type, payload } = action;
+    const existingCartItemIndex = state.addedToCart.findIndex(item => item.item.name === payload.name);
 
     switch (type) {
         case "ADD_TO_CART":
-            const existingCartItemIndex = state.addedToCart.findIndex(item => item.item.name === payload.name);
-
             if (existingCartItemIndex !== -1) {
                 // Item already exists in cart, update quantity
                 const updatedCart = [...state.addedToCart];
@@ -27,6 +26,17 @@ const cartReducer = (state = initialState, action) => {
                     ]
                 };
             }
+        case "DELETE_CART_ITEM":
+            if (existingCartItemIndex !== -1) {
+                // Item exists in cart, create a new cart array without the deleted item
+                const updatedCart = state.addedToCart.filter((item, index) => index !== existingCartItemIndex);
+                console.log("Deleting", payload.name);
+                return {
+                    ...state,
+                    addedToCart: updatedCart
+                };
+            }
+            return state; // If item not found, return current state
         default:
             return state;
     }

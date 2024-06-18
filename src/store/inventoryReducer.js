@@ -19,6 +19,7 @@ const inventoryReducer = (state = initialState, action) => {
         default:
             return state;
     }
+
 };
 
 export default inventoryReducer;
