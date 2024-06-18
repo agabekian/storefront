@@ -1,10 +1,12 @@
 import {createStore, combineReducers} from 'redux';
-import { composeWithDevTools } from '@redux-devtools/extension';
+// import { composeWithDevTools } from '@redux-devtools/extension'; //not using it?
+import inventory from './inventoryReducer.js'; //lab36
+import cart from './cartReducer.js'; //lab37
 
-import inventory from './inventory.js';
+let reducers = combineReducers({cart: cart, inventory});
 
-let reducers = combineReducers({ inventory });//name shows later in hooks/state
 
-const store = createStore(reducers, composeWithDevTools());
+// let reducers = combineReducers({ inventory }); //name shows later in hooks/state
+// const store = createStore(reducers, composeWithDevTools()); //lab36
 
-export default store;
+export default createStore(reducers); //newer?
