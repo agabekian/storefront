@@ -2,6 +2,7 @@ import { Button, Typography, Card, CardContent, Grid } from '@mui/material';
 import SimpleCart from './cart/SimpleCart.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { dispatchData, dispatchClicked } from './store/actions.js';
+import Header from "./Header/Header.jsx";
 
 function App() {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function App() {
 
     return (
         <>
-            <Typography variant="h1">STOREFRONT</Typography>
+            <Header/>
             <Button variant="contained" onClick={handleDisplay} name="food">
                 Food
             </Button>
