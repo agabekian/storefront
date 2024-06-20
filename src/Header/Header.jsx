@@ -6,7 +6,10 @@ import {dispatchClicked, dispatchData} from "../store/actions.js";
 const SimpleCart = () => {
     const cartItems = useSelector((state) => state.cart.addedToCart) || [];
     const dispatch = useDispatch();
-    const handleDisplay = (e) => dispatch(dispatchData(e.target.name));
+
+    const handleDisplay = (e) =>{
+        dispatch(dispatchData(e.target.name));
+    }
 
     const handleClick = (item) => {
         console.log(item);

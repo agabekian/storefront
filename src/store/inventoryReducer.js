@@ -1,20 +1,23 @@
 // inventoryReducer.js
 const initialState = {
-    items: [
-        { id: 1, cat: 'food', name: 'caviar', price: "you can't really afford" },
-        { id: 2, cat: 'food', name: 'truffles', price: "1500 oregon dollars" },
-        { id: 3, cat: 'electronics', name: 'tv', price: 699 },
-        { id: 4, cat: 'electronics', name: 'radio', price: 19.99 },
-    ],
+    items: [],
     displaySTATE: []
 };
 
 const inventoryReducer = (state = initialState, action) => {
-    switch (action.type) {
+    let {type, payload} = action;
+    switch (type) {
+
+        case 'GET':
+            return {...state, items: payload};
+
         case "FILTER_BY_CATEGORY":
+            console.log("received",payload)
+
             return {
                 ...state,
-                displaySTATE: state.items.filter(item => item.cat === action.payload)
+                displaySTATE: state.items.filter(item =>
+                    item.cat === payload)
             };
         default:
             return state;

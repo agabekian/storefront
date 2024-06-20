@@ -21,10 +21,9 @@ const SimpleCart = () => {
                             <CardContent>
                                 <Typography variant="h5" component="div">
                                     {i.item.name.toUpperCase()}
-                                    <br/>
+                                    <hr/>
                                     ${i.item.price}
                                 </Typography>
-
                                 <Typography
                                     variant="body2"
                                     component="span"
@@ -38,7 +37,22 @@ const SimpleCart = () => {
                                         color: 'text.secondary',
                                     }}
                                 >
-                                    {i.item.cat}
+                                    {i.item.category}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    component="span"
+                                    sx={{
+                                        display: 'inline-block',
+                                        marginTop: 1,
+                                        padding: '2px 4px',
+                                        border: '1px solid',
+                                        borderColor: 'text.secondary',
+                                        borderRadius: '4px',
+                                        color: 'text.secondary',
+                                    }}
+                                >
+                                    ${i.item.price}
                                 </Typography>
                             </CardContent>
                             <Button onClick={() => deleteX(i.item)}>delete</Button>

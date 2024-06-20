@@ -2,6 +2,7 @@
 #####  Author: A.Agabekian 
 ######  6.17.24 lab36
 ######  6.18.24 lab37 :
+* Async with Thunk (remote)
 * New header with cart icon
   * Displays cart size 
 * Add to shopping cart. 
@@ -14,7 +15,7 @@
 ### Storefront
 
 ####  setup
-`npm install react-redux`
+`npm install react-redux react-thunk axios`
 
 #### run
 `npm run dev`

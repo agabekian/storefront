@@ -1,19 +1,31 @@
+import {useEffect, useState} from 'react';
 import { Button, Typography, Card, CardContent, Grid } from '@mui/material';
 import SimpleCart from './cart/SimpleCart.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { dispatchData, dispatchClicked } from './store/actions.js';
+import { dispatchData, dispatchClicked, getStuff } from './store/actions';
 import Header from "./Header/Header.jsx";
 
 function App() {
     const dispatch = useDispatch();
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const displayedItems = useSelector((state) => state.inventory.displaySTATE || []);
 
-    const handleDisplay = (e) => dispatch(dispatchData(e.target.name));
+    const handleDisplay = (category) => {
+        dispatch(dispatchData(category));
+    };
+
     const handleClick = (item) => {
-        console.log(item);
         dispatch(dispatchClicked(item));
     };
+
+    const handleViewDetails = (item) => {
+        setSelectedItem(item);
+    };
+
+    useEffect(() => {
+        dispatch(getStuff());
+    }, [dispatch]);
 
     return (
         <>
@@ -27,13 +39,28 @@ function App() {
                                     <CardContent>
                                         <Typography variant="h5" component="div">
                                             {item.name}
-                                            <Button
-                                                onClick={() => handleClick(item)}
-                                                variant="outlined"
-                                            >
-                                                Add
-                                            </Button>
+                                            <Typography variant="body1" component="div">
+                                                {item.cat}
+                                            </Typography>
                                         </Typography>
+                                        {selectedItem && selectedItem.id === item.id && (
+                                            <div>
+                                                <Typography variant="body1" component="div">
+                                                    Description: {item.description}
+                                                </Typography>
+                                                <Typography variant="body1" component="div">
+                                                    Price: {item.price}
+                                                </Typography>
+                                            </div>
+                                        )}
+                                        {(selectedItem === null || selectedItem.id !== item.id) && (
+                                            <Button variant="outlined" onClick={() => handleViewDetails(item)}>
+                                                View Details
+                                            </Button>
+                                        )}
+                                        <Button variant="outlined" onClick={() => handleClick(item)}>
+                                            Add
+                                        </Button>
                                     </CardContent>
                                 </Card>
                             </Grid>
@@ -41,7 +68,7 @@ function App() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <SimpleCart /> {/* Render SimpleCart component here */}
+                    <SimpleCart/>
                 </Grid>
             </Grid>
         </>
