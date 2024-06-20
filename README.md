@@ -14,7 +14,7 @@
 ### Storefront
 
 ####  setup
-`npm install react-redux`
+`npm install react-redux react-thunk axios`
 
 #### run
 `npm run dev`

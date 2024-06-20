@@ -1,4 +1,6 @@
 // ACTION CREATORS
+import axios from 'axios';
+
 // Calling these with dispatch will return an action object that can be passed to the reducer and change state
 export function dispatchData(category) {
     return {
@@ -19,3 +21,26 @@ export function deleteClicked(item) {
         payload: item
     }
 }
+let url = "https://auth-server-2eag.onrender.com/api/v1/products";
+export const getStuff = () => async (dispatch) => {
+    console.log("getting url", url)
+    const response = await axios.get(url);
+    const actionObject = {
+        type: "GET",
+        payload: response.data
+    }
+    console.log(response.data)
+    dispatch(actionObject);
+}
+
+// Long form of the above
+// export function getStuff() {
+//   return async function (dispatch) {
+//     const response = await axios.get(url);
+//     const actionObject = {
+//       type: "GET",
+//       payload: response.data
+//     }
+//     dispatch(actionObject);
+//   }
+// }
