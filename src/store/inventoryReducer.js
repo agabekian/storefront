@@ -1,6 +1,7 @@
 // inventoryReducer.js
 const initialState = {
     items: [],
+    singleItem: {},
     displaySTATE: []
 };
 
@@ -12,13 +13,23 @@ const inventoryReducer = (state = initialState, action) => {
             return {...state, items: payload};
 
         case "FILTER_BY_CATEGORY":
-            console.log("received",payload)
+            console.log("received", payload)
 
             return {
                 ...state,
                 displaySTATE: state.items.filter(item =>
                     item.cat === payload)
             };
+        case "GET_DETAILS":
+            console.log("details asked for", payload)
+
+            return {
+                ...state,
+                singleItem: state.items.find(item =>
+                    item.id === payload)
+            };
+
+
         default:
             return state;
     }

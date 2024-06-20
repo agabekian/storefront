@@ -37,6 +37,8 @@ const cartReducer = (state = initialState, action) => {
                 };
             }
             return state; // If item not found, return current state
+
+
         default:
             return state;
     }
