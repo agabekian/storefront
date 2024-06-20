@@ -11,12 +11,10 @@ function App() {
 
     const displayedItems = useSelector((state) => state.inventory.displaySTATE || []);
 
-    const handleDisplay = (category) => {
-        dispatch(dispatchData(category));
-    };
 
-    const handleClick = (item) => {
-        dispatch(dispatchClicked(item));
+
+    const handleClick = (category) => {
+        dispatch(dispatchClicked(category));
     };
 
     const handleViewDetails = (item) => {
