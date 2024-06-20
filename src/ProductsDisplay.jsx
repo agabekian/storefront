@@ -1,5 +1,5 @@
 import {Button, Card, CardContent, Grid, Typography} from "@mui/material";
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { dispatchClicked, getStuff } from './store/actions';
 
@@ -8,12 +8,10 @@ export default function ProductsDislay(){
 
     const displayedItems = useSelector((state) => state.inventory.displaySTATE || []);
 
-    const [selectedItem, setSelectedItem] = useState(null); //move to store?
 
 
     const handleClick = (category) => dispatch(dispatchClicked(category));
 
-    const handleViewDetails = (item) => setSelectedItem(item);
 
     useEffect(() => {
         dispatch(getStuff());
@@ -33,21 +31,7 @@ return (
                                         {item.cat}
                                     </Typography>
                                 </Typography>
-                                {selectedItem && selectedItem.id === item.id && (
-                                    <div>
-                                        <Typography variant="body1" component="div">
-                                            Description: {item.description}
-                                        </Typography>
-                                        <Typography variant="body1" component="div">
-                                            Price: {item.price}
-                                        </Typography>
-                                    </div>
-                                )}
-                                {(selectedItem === null || selectedItem.id !== item.id) && (
-                                    <Button variant="outlined" onClick={() => handleViewDetails(item)}>
-                                        View Details
-                                    </Button>
-                                )}
+
                                 <Button variant="outlined" onClick={() => handleClick(item)}>
                                     Add
                                 </Button>
