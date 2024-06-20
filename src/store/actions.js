@@ -8,6 +8,7 @@ export function dispatchData(category) {
         payload: category
     }
 }
+
 export function dispatchClicked(item) {
     return {
         type: "ADD_TO_CART",
@@ -21,16 +22,26 @@ export function deleteClicked(item) {
         payload: item
     }
 }
-let url = "https://auth-server-2eag.onrender.com/api/v1/products";
+
+let url = import.meta.env.VITE_SERVER_URL;
 export const getStuff = () => async (dispatch) => {
-    console.log("getting url", url)
-    const response = await axios.get(url);
-    const actionObject = {
-        type: "GET",
-        payload: response.data
+    const token = import.meta.env.VITE_AUTH_KEY;
+    const config = {
+        headers: {Authorization: `Bearer ${token}`}
+    };
+
+    try {
+        const response = await axios.get(url, config);
+        const actionObject = {
+            type: "GET",
+            payload: response.data
+        };
+        console.log(response.data);
+        dispatch(actionObject);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        // Optionally, you can dispatch an error action here
     }
-    console.log(response.data)
-    dispatch(actionObject);
 }
 
 // Long form of the above
