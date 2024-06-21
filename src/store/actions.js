@@ -16,12 +16,21 @@ export function dispatchClicked(item) {
     }
 }
 
+
 export function deleteClicked(item) {
     return {
         type: "DELETE_CART_ITEM",
         payload: item
     }
 }
+
+export function detailsClicked(id) {
+    return {
+        type: "GET_DETAILS",
+        payload: id
+    }
+}
+
 
 let url = import.meta.env.VITE_SERVER_URL;
 export const getStuff = () => async (dispatch) => {

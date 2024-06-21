@@ -1,45 +1,35 @@
-const initialState = {
-    addedToCart: []
-};
+import { createSlice } from '@reduxjs/toolkit';
 
-const cartReducer = (state = initialState, action) => {
-    const { type, payload } = action;
-    const existingCartItemIndex = state.addedToCart.findIndex(item => item.item.name === payload.name);
+export const cartSlice = createSlice({
+    name: 'cart',
+    initialState: {
+        addedToCart: [],
+    },
+    reducers: {
+        add_to_cart: (state, action) => {
+            const { payload } = action;
+            console.log("ADDING TO CART:", payload);
 
-    switch (type) {
-        case "ADD_TO_CART":
-            if (existingCartItemIndex !== -1) {
-                // Item already exists in cart, update quantity
-                const updatedCart = [...state.addedToCart];
-                updatedCart[existingCartItemIndex].quantity++;
-                return {
-                    ...state,
-                    addedToCart: updatedCart
-                };
+            const existingCartItem = state.addedToCart.find(item => item.item.name === payload.name);
+
+            if (existingCartItem) {
+                // If item already exists in cart, increase its quantity
+                existingCartItem.quantity++;
             } else {
                 // Item does not exist in cart, add new item
-                return {
-                    ...state,
-                    addedToCart: [
-                        ...state.addedToCart,
-                        { item: payload, quantity: 1 }
-                    ]
-                };
+                state.addedToCart.push({ item: payload, quantity: 1 });
             }
-        case "DELETE_CART_ITEM":
-            if (existingCartItemIndex !== -1) {
-                // Item exists in cart, create a new cart array without the deleted item
-                const updatedCart = state.addedToCart.filter((item, index) => index !== existingCartItemIndex);
-                console.log("Deleting", payload.name);
-                return {
-                    ...state,
-                    addedToCart: updatedCart
-                };
-            }
-            return state; // If item not found, return current state
-        default:
-            return state;
-    }
-};
+        },
+        delete_from_cart: (state, action) => {
+            const { payload } = action;
+            console.log("Deleting", payload.name);
 
-export default cartReducer;
+            // Remove item from cart
+            state.addedToCart = state.addedToCart.filter(item => item.item.name !== payload.name);
+        }
+    }
+});
+
+export const { add_to_cart, delete_from_cart } = cartSlice.actions;
+
+export default cartSlice.reducer;

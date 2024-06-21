@@ -1,13 +1,14 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {Card, CardContent, Typography, Box, Stack, Button} from '@mui/material';
-import {deleteClicked} from "../store/actions.js";
+import {delete_from_cart} from "../store/cartReducer.js";
 
 const SimpleCart = () => {
         const cartItems = useSelector((state) => state.cart.addedToCart) || [];
         const dispatch = useDispatch();
+
         const deleteX = (cartItem) => {
-            console.log("Delete request for",cartItem)
-            dispatch(deleteClicked(cartItem));
+            console.log("Delete request for", cartItem)
+            dispatch(delete_from_cart(cartItem));
         }
 
         return (
@@ -24,6 +25,7 @@ const SimpleCart = () => {
                                     <hr/>
                                     ${i.item.price}
                                 </Typography>
+
                                 <Typography
                                     variant="body2"
                                     component="span"
@@ -37,23 +39,10 @@ const SimpleCart = () => {
                                         color: 'text.secondary',
                                     }}
                                 >
-                                    {i.item.category}
+                                    {i.item.cat}
+
                                 </Typography>
-                                <Typography
-                                    variant="body2"
-                                    component="span"
-                                    sx={{
-                                        display: 'inline-block',
-                                        marginTop: 1,
-                                        padding: '2px 4px',
-                                        border: '1px solid',
-                                        borderColor: 'text.secondary',
-                                        borderRadius: '4px',
-                                        color: 'text.secondary',
-                                    }}
-                                >
-                                    ${i.item.price}
-                                </Typography>
+
                             </CardContent>
                             <Button onClick={() => deleteX(i.item)}>delete</Button>
                         </Card>

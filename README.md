@@ -11,11 +11,13 @@
   * option to delete an item.
 * MUI styling updated
 * Began to modularize
+######  6.18.24 lab39
+* Migrated reducers to RTK. New "Details" component. Optimizations.
 
 ### Storefront
 
 ####  setup
-`npm install react-redux react-thunk axios`
+`npm install react-redux  axios`
 
 #### run
 `npm run dev`

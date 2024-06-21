@@ -1,45 +1,37 @@
-import {useDispatch, useSelector} from 'react-redux';
-import {Badge, AppBar, Toolbar, IconButton, Typography, Button} from '@mui/material';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Badge, AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {dispatchClicked, dispatchData} from "../store/actions.js";
+import { filter_cat } from "../store/inventoryReducer.js";
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const SimpleCart = () => {
     const cartItems = useSelector((state) => state.cart.addedToCart) || [];
+    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+
     const dispatch = useDispatch();
 
-    const handleDisplay = (e) =>{
-        dispatch(dispatchData(e.target.name));
-    }
-
-    const handleClick = (item) => {
-        console.log(item);
-        dispatch(dispatchClicked(item));
+    const handleDisplay = (e) => {
+        dispatch(filter_cat(e.target.name));
     };
 
     return (
         <AppBar position="static">
             <Toolbar>
-
-                <Typography variant="h4" component="div" sx={{
-                    flexGrow: 1,
-                    padding: '8px',
-                    letterSpacing: '4px',
-
-                    // textTransform: 'uppercase'
-                }}>
-                    <em>Norh front</em>
+                <Typography variant="h4" component="div" sx={{ flexGrow: 1, padding: '8px', letterSpacing: '4px' }}>
+                    <Button component={Link} to="/" sx={{ color: 'inherit', textDecoration: 'none' }}>
+                        <em>Norh front</em>
+                    </Button>
                     <Button variant="contained" onClick={handleDisplay} name="food">
                         Food
                     </Button>
                     <Button variant="contained" onClick={handleDisplay} name="electronics">
                         Electronics
                     </Button>
-
                 </Typography>
-
-                <IconButton color="inherit" aria-label="open cart">
-                    <Badge badgeContent={cartItems.length} color="error">
-                        <ShoppingCartIcon/>
+                <IconButton color="inherit" aria-label="open cart" component={Link} to="/cart">
+                    <Badge badgeContent={totalQuantity} color="error">
+                        <ShoppingCartIcon />
                     </Badge>
                 </IconButton>
             </Toolbar>
