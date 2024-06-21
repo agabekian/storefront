@@ -2,8 +2,9 @@ import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import {Grid} from '@mui/material';
-import {useDispatch} from 'react-redux';
-import {getStuff} from './store/actions';
+import {useDispatch, useSelector} from 'react-redux';
+// import {getStuff} from './store/actions';
+import { getStuff } from './store/inventoryReducer.js';
 import Header from "./Header/Header.jsx";
 import ProductsDisplay from "./ProductsDisplay.jsx";
 import SimpleCart from './cart/SimpleCart.jsx';
@@ -11,6 +12,7 @@ import Details from './Details.jsx';
 
 function App() {
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch(getStuff());

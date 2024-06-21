@@ -4,7 +4,6 @@ import {deleteClicked} from "../store/actions.js";
 
 const SimpleCart = () => {
         const cartItems = useSelector((state) => state.cart.addedToCart) || [];
-
         const dispatch = useDispatch();
 
         const deleteX = (cartItem) => {

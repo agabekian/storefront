@@ -1,14 +1,18 @@
-import { Button, Card, CardContent, Typography, Container } from "@mui/material";
+import { Card, CardContent, Container, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export default function Details() {
-    const itemDetails = useSelector((state) => state.inventory.singleItem || { name: "not found", price: "", description: "", cat: "" });
+    // Use useSelector to access the singleItem state from the Redux store
+    const itemDetails = useSelector((state) =>
+        state.inventory.singleItem || { name: "not found", price: "", description: "", cat: "" }
+    );
+
+    console.log("IN JSX", itemDetails);
 
     return (
         <Container maxWidth="md" sx={{ marginTop: 4 }}> {/* Adjust marginTop to align below header */}
             <Card sx={{ width: '100%', padding: 4 }}>
                 <CardContent>
-
                     <Typography variant="h3" component="div" gutterBottom>
                         {itemDetails.name}
                     </Typography>

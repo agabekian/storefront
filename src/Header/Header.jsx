@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge, AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { dispatchClicked, dispatchData } from "../store/actions.js";
+import { filter_cat } from "../store/inventoryReducer.js";
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const SimpleCart = () => {
     const cartItems = useSelector((state) => state.cart.addedToCart) || [];
+
     const dispatch = useDispatch();
 
     const handleDisplay = (e) => {
-        dispatch(dispatchData(e.target.name));
+        dispatch(filter_cat(e.target.name));
     };
 
     return (
