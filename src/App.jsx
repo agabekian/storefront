@@ -9,6 +9,7 @@ import Header from "./Header/Header.jsx";
 import ProductsDisplay from "./ProductsDisplay.jsx";
 import SimpleCart from './cart/SimpleCart.jsx';
 import Details from './Details.jsx';
+import CartView from "./cart/CartView.jsx";
 
 function App() {
     const dispatch = useDispatch();
@@ -25,6 +26,8 @@ function App() {
                 <ProductsDisplay/>
                 <SimpleCart/></Grid>}/>
             <Route path="/item-details/:id" element={<Details/>}/>
+            <Route path="/cart/" element={<CartView/>}/>
+
 
 
         </Routes>

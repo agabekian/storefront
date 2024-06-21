@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {Card, CardContent, Typography, Box, Stack, Button} from '@mui/material';
-import {deleteClicked} from "../store/actions.js";
+import {delete_from_cart} from "../store/cartReducer.js";
 
 const SimpleCart = () => {
         const cartItems = useSelector((state) => state.cart.addedToCart) || [];
@@ -8,7 +8,7 @@ const SimpleCart = () => {
 
         const deleteX = (cartItem) => {
             console.log("Delete request for", cartItem)
-            dispatch(deleteClicked(cartItem));
+            dispatch(delete_from_cart(cartItem));
         }
 
         return (
