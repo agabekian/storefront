@@ -1,9 +1,11 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {Card, CardContent, Typography, Box, Stack, Button} from '@mui/material';
+import {Card, CardContent, Typography, Box, Stack, Button, ListItemText} from '@mui/material';
 import {delete_from_cart} from "../store/cartReducer.js";
+import React from "react";
 
 const SimpleCart = () => {
         const cartItems = useSelector((state) => state.cart.addedToCart) || [];
+
         const dispatch = useDispatch();
 
         const deleteX = (cartItem) => {
@@ -14,7 +16,7 @@ const SimpleCart = () => {
         return (
             <Box sx={{backgroundColor: '#f0f0f0', padding: 2}}>
                 <Typography variant="h6" gutterBottom>
-                    CART:
+                    Items In Cart
                 </Typography>
                 <Stack spacing={2}>
                     {cartItems.map((i) => (
@@ -24,6 +26,7 @@ const SimpleCart = () => {
                                     {i.item.name.toUpperCase()}
                                     <hr/>
                                     ${i.item.price}
+                                    <ListItemText primary={i.item.name} secondary={`Quantity: ${i.quantity}`} />
                                 </Typography>
 
                                 <Typography

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-
 import {Grid} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 // import {getStuff} from './store/actions';
@@ -24,11 +23,10 @@ function App() {
         <Routes>
             <Route path="/" element={<Grid item xs={12} md={3}>
                 <ProductsDisplay/>
-                <SimpleCart/></Grid>}/>
+                <SimpleCart/>
+            </Grid>}/>
             <Route path="/item-details/:id" element={<Details/>}/>
             <Route path="/cart/" element={<CartView/>}/>
-
-
 
         </Routes>
     </Router>);

@@ -28,6 +28,9 @@ const SimpleCart = () => {
                     <Button variant="contained" onClick={handleDisplay} name="electronics">
                         Electronics
                     </Button>
+                    <Button variant="contained" onClick={handleDisplay} name="occult">
+                        Occult
+                    </Button>
                 </Typography>
                 <IconButton color="inherit" aria-label="open cart" component={Link} to="/cart">
                     <Badge badgeContent={totalQuantity} color="error">
