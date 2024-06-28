@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Stack, Typography, Card, CardContent, Grid } from '@mui/material';
 // import { formatPrice } from './utils'; // Import custom formatPrice function (optional)
