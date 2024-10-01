@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import axios from 'axios'
+import axios from 'axios';
 
 export const stuffSlice = createSlice({
     name: 'stuff',
@@ -44,19 +44,19 @@ export const {
 } = stuffSlice.actions;
 
 export const getStuff = () => async (dispatch) => {
-    console.log("RUNNIG RTK")
-    const url = import.meta.env.VITE_SERVER_URL;
+    console.log("getting 'stuff' - running RTK")
+
+    const url = `${import.meta.env.VITE_SERVER_URL}/api/v1/Inventory`;
     const token = import.meta.env.VITE_AUTH_KEY;
-    const config = {
-        headers: {Authorization: `Bearer ${token}`}
-    };
+    console.log("URL:", url);
+    console.log("Token:", token);
+    const config = {headers: {Authorization: `Bearer ${token}`}};
     const response = await axios.get(url, config);
     dispatch(get(response.data));
     console.log("response", response.data);
 }
 
 export default stuffSlice.reducer;
-
 
 //OLD WAY
 // const initialState = {
@@ -88,8 +88,6 @@ export default stuffSlice.reducer;
 //                 singleItem: state.items.find(item =>
 //                     item.id === payload)
 //             };
-//
-//
 //         default:
 //             return state;
 //     }

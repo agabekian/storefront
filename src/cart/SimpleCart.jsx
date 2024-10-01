@@ -5,14 +5,12 @@ import React from "react";
 
 const SimpleCart = () => {
         const cartItems = useSelector((state) => state.cart.addedToCart) || [];
-
         const dispatch = useDispatch();
 
         const deleteX = (cartItem) => {
             console.log("Delete request for", cartItem)
             dispatch(delete_from_cart(cartItem));
         }
-
         return (
             <Box sx={{backgroundColor: '#f0f0f0', padding: 2}}>
                 <Typography variant="h6" gutterBottom>
@@ -26,9 +24,8 @@ const SimpleCart = () => {
                                     {i.item.name.toUpperCase()}
                                     <hr/>
                                     ${i.item.price}
-                                    <ListItemText primary={i.item.name} secondary={`Quantity: ${i.quantity}`} />
+                                    <ListItemText primary={i.item.name} secondary={`Quantity: ${i.quantity}`}/>
                                 </Typography>
-
                                 <Typography
                                     variant="body2"
                                     component="span"
@@ -43,9 +40,7 @@ const SimpleCart = () => {
                                     }}
                                 >
                                     {i.item.cat}
-
                                 </Typography>
-
                             </CardContent>
                             <Button onClick={() => deleteX(i.item)}>delete</Button>
                         </Card>
