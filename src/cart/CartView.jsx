@@ -1,7 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { Stack, Typography, Card, CardContent, Grid, Button, Box } from '@mui/material';
-import { delete_from_cart, update_quantity } from '../store/cartReducer';
-import { useNavigate } from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import {Typography, Button, Box} from '@mui/material';
+import {delete_from_cart, update_quantity} from '../store/cartReducer';
+import {useNavigate} from 'react-router-dom';
 
 const CartContents = () => {
     const cartItems = useSelector((state) => state.cart.addedToCart) || [];
@@ -22,7 +22,7 @@ const CartContents = () => {
                 dispatch(delete_from_cart(item.item)); // Remove item from cart
             }
         } else {
-            dispatch(update_quantity({ item: item.item, quantity: newQuantity }));
+            dispatch(update_quantity({item: item.item, quantity: newQuantity}));
         }
     };
 
@@ -40,9 +40,9 @@ const CartContents = () => {
     };
 
     return (
-        <Stack spacing={4}>
-            <Typography variant="h5" gutterBottom>
-                Cart Contents
+        <Box sx={{mx: 33, mt: 4}}> {/* Adjusting l/r, plus top margins */}
+            <Typography variant="body1" sx={{color: '#B0B0B0'}}>
+                Your Shopping Cart
             </Typography>
 
             {cartItems.length === 0 ? (
@@ -50,74 +50,37 @@ const CartContents = () => {
             ) : (
                 <>
                     {cartItems.map((item, index) => (
-                        <Card key={index} sx={{ backgroundColor: '#f9f9f9', borderRadius: '8px' }}>
-                            <CardContent>
-                                <Grid container alignItems="center" spacing={2}>
-                                    <Grid item xs={6} sm={4}>
-                                        <Typography variant="h6" component="div">
-                                            {item.item.name}
-                                        </Typography>
-                                    </Grid>
-
-                                    <Grid item xs={4} sm={3}>
-                                        <Box display="flex" justifyContent="center" alignItems="center">
-                                            <Button
-                                                size="small"
-                                                onClick={() => handleQuantityChange(item, false)}
-                                                sx={{ minWidth: '30px' }}
-                                            >
-                                                -
-                                            </Button>
-                                            <Typography variant="body1" component="span" sx={{ mx: 1 }}>
-                                                {item.quantity}
-                                            </Typography>
-                                            <Button
-                                                size="small"
-                                                onClick={() => handleQuantityChange(item, true)}
-                                                sx={{ minWidth: '30px' }}
-                                            >
-                                                +
-                                            </Button>
-                                        </Box>
-                                    </Grid>
-
-                                    <Grid item xs={4} sm={3}>
-                                        <Typography variant="body2" textAlign="right">
-                                            ${(item.item.price * item.quantity).toFixed(2)}
-                                        </Typography>
-                                    </Grid>
-
-                                    <Grid item xs={2} sm={2}>
-                                        <Button
-                                            size="small"
-                                            color="error"
-                                            onClick={() => handleDelete(item)}
-                                            sx={{ minWidth: '30px' }}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
+                        <Box key={index} sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            borderBottom: '1px solid #ddd',
+                            padding: '8px 0'
+                        }}>
+                            <Typography variant="h6" sx={{flexGrow: 1}}>{item.item.name}</Typography>
+                            <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                <Button size="small" onClick={() => handleQuantityChange(item, false)}>-</Button>
+                                <Typography variant="body1" sx={{mx: 1}}>{item.quantity}</Typography>
+                                <Button size="small" onClick={() => handleQuantityChange(item, true)}>+</Button>
+                            </Box>
+                            <Typography variant="body2" sx={{
+                                width: '100px',
+                                textAlign: 'right'
+                            }}>${(item.item.price * item.quantity).toFixed(2)}</Typography>
+                            <Button size="small" color="error" onClick={() => handleDelete(item)}>Delete</Button>
+                        </Box>
                     ))}
 
-                    <Typography variant="h6" gutterBottom sx={{ textAlign: 'right' }}>
+                    <Typography variant="h6" sx={{textAlign: 'right', mt: 2}}>
                         Total Price: ${(totalPrice).toFixed(2)}
                     </Typography>
 
-                    <Box display="flex" justifyContent="flex-end">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleCheckout}
-                        >
-                            Checkout
-                        </Button>
+                    <Box sx={{display: 'flex', justifyContent: 'flex-end', marginTop: 2}}>
+                        <Button variant="contained" color="primary" onClick={handleCheckout}>Checkout</Button>
                     </Box>
                 </>
             )}
-        </Stack>
+        </Box>
     );
 };
 

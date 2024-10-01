@@ -68,10 +68,18 @@ export const cartSlice = createSlice({
                 .then(response => console.log("Cart updated", response.data))
                 .catch(err => console.error("Failed to update cart", err));
             */
+        },
+        clear_cart: (state) => {
+            state.addedToCart = []; // Clear the cart
+            localStorage.removeItem('cart'); // Optionally remove from localStorage
         }
     }
 });
 
-export const {add_to_cart, update_quantity, delete_from_cart} = cartSlice.actions;
+export const {
+    add_to_cart,
+    update_quantity,
+    delete_from_cart,clear_cart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
